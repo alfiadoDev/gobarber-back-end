@@ -70,3 +70,9 @@ A notificacao deve ter um status de lida ou nao lida para que o prestador possa 
 - O usuario nao pode agendar em um horario ja ocupado;
 - O usuario nao pode agendar em um horarrio que ja passou;
 - O usuario nao pode agendar servicos consigo mesmo.
+
+
+const tokenCreatedAt = userToken.created_at;
+    const compareDate = addHours(tokenCreatedAt, 2);
+
+    if (isAfter(Date.now(), compareDate)) throw new AppError('Token Expired');
