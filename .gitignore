@@ -3,6 +3,8 @@ node_modules
 .idea/
 build/
 .env
+dist
+coverage/
 ormconfig.json
 coverage/
 tmp/*
