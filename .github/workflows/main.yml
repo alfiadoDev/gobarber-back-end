@@ -39,8 +39,8 @@ jobs:
           source: ".,!node_modules"
           target: "~/app/gobarber-back-end"
 
-      # Executar Yarn na gitialOcean
-      - name: Installing dependencies on digitalOcean
+      # executar as migrations do typeorm e Restart o servidor node
+      - name: Run productions scripts
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -50,24 +50,6 @@ jobs:
           script: |
             cd ~/app/gobarber-back-end
             yarn
-      # executar as migrations do typeorm
-      - name: Run migrations on digitalOcean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/app/gobarber-back-end
-            yarn prod:typeorm
-      # Restart o servidor node
-      - name: Restart server app gobarber on digitalOcean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: pm2 restart gobarber-api
+            ./node_modules/.bin/typeorm migration:run
+            pm2 restart gobarber-api
             
