@@ -36,10 +36,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "."
+          source: ".,!node_modules"
           target: "~/app/gobarber-back-end"
 
-      # Substituir o codigo existente na pasta "dist" pelo novo codigo
       # Executar Yarn na gitialOcean
+      
       # executar as migrations do typeorm
       # Restart o servidor node
