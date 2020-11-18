@@ -60,6 +60,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/app/gobarber-back-end
+            ls -la
             ./node_modules/.bin/typeorm migration:run
       # Restart o servidor node
       - name: Restart server app gobarber on digitalOcean
