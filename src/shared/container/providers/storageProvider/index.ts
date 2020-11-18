@@ -11,7 +11,14 @@ const providers = {
   s3: S3StorageProvider,
 };
 
-container.registerSingleton<IStorageProvider>(
-  'StorageProvider',
-  providers[uploadConfig.driver],
-);
+if (uploadConfig.driver === 'disck') {
+  container.registerSingleton<IStorageProvider>(
+    'StorageProvider',
+    providers.disck,
+  );
+} else if (uploadConfig.driver === 's3') {
+  container.registerSingleton<IStorageProvider>(
+    'StorageProvider',
+    providers.s3,
+  );
+}
